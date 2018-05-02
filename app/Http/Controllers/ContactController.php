@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\ContactSubmission;
 use App\Mail\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -13,7 +14,7 @@ class ContactController extends Controller
 {
     public function send(Request $request)
     {
-        $values = $request->all();
+        $values = $request->only(['name', 'email', 'phone', 'message']);
 
         $validator = Validator::make($values, [
             'name'    => 'required',
@@ -31,10 +32,16 @@ class ContactController extends Controller
         }
 
         // Store in the db
+        $insert = $values;
+        $insert['ip'] = $request->ip();
+        ContactSubmission::create($insert);
 
         // Send the email
         Mail::to(env('CONTACT_MAIL_TO'))->send(new Contact(
             $values['name'], $values['email'], $values['message'], $values['phone']
         ));
+
+        return redirect(URL::to('/#contact'))
+            ->with('contact-success', 'Thank you for getting in touch!');
     }
 }

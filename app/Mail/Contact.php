@@ -39,10 +39,10 @@ class Contact extends Mailable
         return $this
             ->subject('Contact Form Submission')
             ->markdown('emails.contact', [
-            'name'    => $this->name,
-            'email'   => $this->email,
-            'phone'   => $this->phone,
-            'message' => $this->message
-        ]);
+                'name'    => $this->name,
+                'email'   => $this->email,
+                'phone'   => $this->phone,
+                'message' => $this->message
+            ]);
     }
 }
