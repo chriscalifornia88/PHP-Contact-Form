@@ -31,15 +31,15 @@ class ContactController extends Controller
                 ->withErrors($validator->errors());
         }
 
-        // Store in the db
-        $insert = $values;
-        $insert['ip'] = $request->ip();
-        ContactSubmission::create($insert);
-
         // Send the email
         Mail::to(env('CONTACT_MAIL_TO'))->send(new Contact(
             $values['name'], $values['email'], $values['message'], $values['phone']
         ));
+
+        // Store in the db
+        $insert = $values;
+        $insert['ip'] = $request->ip();
+        ContactSubmission::create($insert);
 
         return redirect(URL::to('/#contact'))
             ->with('contact-success', 'Thank you for getting in touch!');
