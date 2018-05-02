@@ -11,31 +11,36 @@
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Contact Guy Smiley</h2>
                 <p>Remember Guy Smiley? Yeah, he wants to hear from you.</p>
-                <small class="pull-right">* indicates required fields</small>
+                <small class="pull-right">* indicates a required field</small>
                 <div class="clearfix"></div>
-                <form class="form-horizontal">
-                    <div class="form-group">
+                <form action="{{ url('contact') }}" method="post" id="contact-form" class="form-horizontal">
+                    {{ csrf_field() }}
+                    <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                         <label class="col-sm-2 control-label" for="name">Full Name *</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="name" name="name" required/>
+                            <small class="help-block" style="text-align: left">{{ $errors->first('name') }}</small>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                         <label class="col-sm-2 control-label" for="email">Email *</label>
                         <div class="col-sm-10">
                             <input type="email" class="form-control" id="email" name="email" required/>
+                            <small class="help-block" style="text-align: left">{{ $errors->first('email') }}</small>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="message">Phone</label>
                         <div class="col-sm-10">
                             <input type="tel" class="form-control" id="phone" name="phone"/>
+                            <small class="help-block" style="text-align: left">{{ $errors->first('phone') }}</small>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('message') ? 'has-error' : '' }}">
                         <label class="col-sm-2 control-label" for="message">Message *</label>
                         <div class="col-sm-10">
                             <textarea rows="7" type="text" class="form-control" id="message" name="message" required></textarea>
+                            <small class="help-block" style="text-align: left">{{ $errors->first('message') }}</small>
                         </div>
                     </div>
                     <input type="submit" class="pull-right btn btn-primary" name="submit" value="Send"/>

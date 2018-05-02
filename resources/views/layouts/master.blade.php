@@ -82,7 +82,9 @@
 <!-- Footer -->
 <footer>
     <div class="container text-center">
-        <p><small>Copyright 2018 Dealer Inspire</small></p>
+        <p>
+            <small>Copyright 2018 Dealer Inspire</small>
+        </p>
     </div>
 </footer>
 
@@ -100,7 +102,6 @@
 
 <!-- Theme JavaScript -->
 <script src="js/grayscale.min.js"></script>
-
 </body>
 
 </html>
